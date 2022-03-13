@@ -86,4 +86,13 @@ class AuthController extends Controller
             }
         }
     }
+
+
+    public function getUsers(Request $request)
+    {
+        $users = User::all();
+        return response()->json([
+            'users' => $users
+        ]);
+    }
 }
