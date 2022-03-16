@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\ViewCategoryController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 
 /*
@@ -26,6 +27,7 @@ Route::get('users', [AuthController::class, 'getUsers']);
 
 Route::get('view-category', [ViewCategoryController::class, 'category']);
 Route::get('getProduct/{slug}', [ViewCategoryController::class, 'product']);
+Route::get('product-detail/{category_slug}/{product_slug}', [ViewCategoryController::class, 'productDetail']);
 
 
 Route::get('show-category', [CategoryController::class, 'index']);
@@ -38,6 +40,11 @@ Route::get('all-product', [ProductController::class, 'index']);
 Route::post('add-product', [ProductController::class, 'store']);
 Route::get('edit-product/{id}', [ProductController::class, 'edit']);
 Route::post('update-product/{id}', [ProductController::class, 'update']);
+
+
+Route::post('add-to-cart', [CartController::class, 'addTocart']);
+
+
 
 Route::middleware(['auth:sanctum', 'isAdmin'])->group(function () {
     Route::get('/checkAuthenticated', function () {
