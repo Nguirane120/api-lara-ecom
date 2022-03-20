@@ -78,4 +78,35 @@ class CartController extends Controller
             ]);
         }
     }
+
+    public function updateQty($cart_id, $scoop)
+    {
+        if(auth('sanctum')->check())
+        {
+            $user_id = auth('sanctum')->user()->id;
+            $cartItem = Cart::where('id', $cart_id)->where('user_id', $user_id)->first();
+
+            if($scoop == 'inc')
+            {
+                $cartItem->product_qty += 1;
+            }
+            else if($scoop == 'dec')
+            {
+                $cartItem->product_qty -= 1;
+            }
+            $cartItem->update();
+
+            return response()->json([
+                'status' => 200,
+                'cartItem' => $cartItem
+            ]);
+        }
+        else
+        {
+            return response()->json([
+                'status' => 401,
+                'message' => 'Login to view your cart'
+            ]);
+        }
+    }
 }
