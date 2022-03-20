@@ -43,6 +43,7 @@ Route::post('update-product/{id}', [ProductController::class, 'update']);
 
 
 Route::post('add-to-cart', [CartController::class, 'addTocart']);
+Route::get('carts', [CartController::class, 'getCart']);
 
 
 

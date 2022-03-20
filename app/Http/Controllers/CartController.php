@@ -10,53 +10,7 @@ class CartController extends Controller
 {
     public function addTocart(Request $request)
     {
-        // if(auth('sanctum')->check())
-        // {
-        //     $user_id = auth('sanctum')->user()->id;
-        //     $product_id = $request->product_id;
-        //     $product_qty = $request->product_qty;
-        //     $productChecked = Product::where('id', $product_id);
-        //     if($productChecked)
-        //     {
-        //         if(Cart::where('product_id', $product_id)->where('user_id', $user_id)->exists())
-        //         {
-        //             response()->json([
-        //                 'status' => 400,
-        //                 'message' => $productChecked->name.' Alrady added'
-        //             ]);
-
-        //         }
-        //         else
-        //         {
-        //             $cartItem = new Cart();
-        //             $cartItem->user_id = $request->user_id;
-        //             $cartItem->product_id = $request->product_id;
-        //             $cartItem->product_qty = $request->product_qty;
-        //             $cartItem->save();
-
-        //             response()->json([
-        //                 'status' => 200,
-        //                 'message' => "adde successfuly"
-        //             ]);
-        //         }
-        //     }
-        //     else
-        //     {
-        //         response()->json([
-        //             'status' => 404,
-        //             'message' => "product not found"
-        //         ]);
-
-        //     }
-        // }
-
-        // else
-        // {
-        //     response()->json([
-        //         'status' => 401,
-        //         'message' => "Log in first"
-        //     ]);   
-        // }
+      
 
        if(auth('sanctum')->check())
        {
@@ -104,5 +58,24 @@ class CartController extends Controller
        }
     }
 
-    
+    public function getCart()
+    {
+        if(auth('sanctum')->check())
+        {
+            $user_id = auth('sanctum')->user()->id;
+
+            $cartItems = Cart::where('user_id', $user_id)->get();
+            return response()->json([
+                'status' => 200,
+                'cart' => $cartItems
+            ]);
+        }
+
+        else{
+            return response()->json([
+                'status' => 401,
+                'message' => 'Login to view your cart'
+            ]);
+        }
+    }
 }
