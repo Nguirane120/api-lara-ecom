@@ -45,6 +45,7 @@ Route::post('update-product/{id}', [ProductController::class, 'update']);
 Route::post('add-to-cart', [CartController::class, 'addTocart']);
 Route::get('carts', [CartController::class, 'getCart']);
 Route::put('update-carteQty/{cart_id}/{scoop}', [CartController::class, 'updateQty']);
+Route::delete('delete-Item/{cart_id}', [CartController::class, 'deleteCartItem']);
 
 
 
