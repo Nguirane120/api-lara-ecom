@@ -9,6 +9,7 @@ use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\ViewCategoryController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CheckoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +47,8 @@ Route::post('add-to-cart', [CartController::class, 'addTocart']);
 Route::get('carts', [CartController::class, 'getCart']);
 Route::put('update-carteQty/{cart_id}/{scoop}', [CartController::class, 'updateQty']);
 Route::delete('delete-Item/{cart_id}', [CartController::class, 'deleteCartItem']);
+
+Route::post('place-order', [CheckoutController::class, 'placeorder']);
 
 
 
